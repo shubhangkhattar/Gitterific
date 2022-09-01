@@ -1,0 +1,88 @@
+@(myList: RepoProfile)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>Repository Commits</title>
+</head>
+
+<body>
+<h2 class="text-center">Repository Profile</h2>
+<hr>
+
+    <div class="container">
+        <h4><img src="@myList.getOwner_avatar_url()" class="rounded" height="80px"></h4>
+        <h5><b>Repository Name : </b>@myList.getName()</h5>
+        <h5><b>Owner : </b>@myList.getOwner_name()</h5>
+        <h5><b>Description : </b>@myList.getDescription()</h5>
+        <h5><b>Created Date : </b>@myList.getCreated_at()</h5>
+        <h5><b>Last modified Date: </b>@myList.getLast_updated_at()</h5>
+        <h5><b>Number of watchers : </b>@myList.getWatchers_count()</h5>
+        <h5><b>Number of subscribers : </b>@myList.getSubscribers_count()</h5>
+        <h5><b>Forks count : </b>@myList.getForks_count()</h5>
+        <h5><b>Open issues count : </b>@myList.getOpen_issues_count()</h5>
+        
+        <a href="/commits/@myList.getFull_name()" class="btn btn-primary">View Repository Commits</a>
+        
+        <hr>
+
+    	<h3 class="text-center">@myList.getName() Contibuters</h3>
+    	<table class="table table-hover">
+        	<thead>
+        	<tr>
+            	<th scope="col">User Avatar</th>
+            	<th scope="col">Contributer Name</th>
+            	<th scope="col">Number of Contributions</th>
+            	<th scope="col">User Profile</th>
+            </tr>
+        	</thead>
+        	<tbody>
+        	@for(contributers <- myList.getContributers()) {
+        	<tr>
+            	<td><img src="@contributers.getAvatar_url()" class="rounded" height="80px"></td>
+            	<td>@contributers.getName()</td>
+            	<td>@contributers.getContributions_count()</td>
+            	<td><a href="/users/@contributers.getName()" class="btn btn-primary">View</a></td>
+
+        	</tr>
+        	}
+        	</tbody>
+    	</table>
+        
+        <hr>
+
+    	<h3 class="text-center">@myList.getName() Top 20 Issues</h3>
+    	<table class="table table-hover">
+        	<thead>
+        	<tr>
+            	<th scope="col">Issue Title</th>
+            	<th scope="col">Issue Owner</th>
+            	<th scope="col">Comments</th>
+            	<th scope="col">Issue statistics page</th>
+            </tr>
+        	</thead>
+        	<tbody>
+        	@for(issues <- myList.getIssues()) {
+        	<tr>
+            	<td>@issues.getIssue_title()</td>
+            	<td>@issues.getIssue_owner()</td>
+            	<td>@issues.getComments()</td>
+            	<td><a href="GET /users/@issues.getIssue_owner()" class="btn btn-primary">View</a></td>
+
+        	</tr>
+        	}
+        	</tbody>
+    	</table>
+        
+        
+    </div>
+</body>
+</html>        

@@ -1,0 +1,105 @@
+@(myUSer: User)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>User:@myUSer.getLogin()</title>
+</head>
+<body>
+<h2 class="text-center">User Profile</h2>
+<hr>
+
+
+<div class="container">
+    <h4><b>User ID : </b>@myUSer.getLogin()</h4>
+
+    <img src="@myUSer.getAvatar_url()" class="rounded" height="80px">
+
+    @if(myUSer.getName() == "null") {
+    <h5><b>User Name : </b> Not Available </h5>
+    } else {
+    <h5><b>Full Name : </b>@myUSer.getName()</h5>
+    }
+
+    @if(myUSer.getBio() == "null") {
+    <h5><b>Bio : </b>Not Available</h5>
+    } else {
+    <h5><b>Bio : </b>@myUSer.getBio()</h5>
+    }
+
+    @if(myUSer.getEmail() == "null") {
+    <h5><b>Email : </b>Not Available</h5>
+    } else {
+    <h5><b>Email : </b>@myUSer.getEmail()</h5>
+    }
+
+    @if(myUSer.getFollowers() == "null") {
+    <h5><b>Followers : </b>Not Available</h5>
+    } else {
+    <h5><b>Followers : </b>@myUSer.getFollowers()</h5>
+    }
+
+
+    @if(myUSer.getFollowing() == "null") {
+    <h5><b>Following : </b>Not Available</h5>
+    } else {
+    <h5><b>Following : </b>@myUSer.getFollowing()</h5>
+    }
+
+    @if(myUSer.getLocation() == "null") {
+    <h5><b>Location : </b>Not Available</h5>
+    } else {
+    <h5><b>Location : </b>@myUSer.getLocation()</h5>
+    }
+    
+    @if(myUSer.getCompany() == "null") {
+    <h5><b>Company : </b>Not Available</h5>
+    } else {
+    <h5><b>Company : </b>@myUSer.getCompany()</h5>
+    }
+
+
+    <a href="@myUSer.getUrl()" class="btn btn-primary">View On GitHub</a>
+
+
+    <hr>
+
+    <h3 class="text-center">@myUSer.getLogin() Repositories</h3>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Repository Name</th>
+            <th scope="col">Repository Description</th>
+            <th scope="col">Repository Link</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        @for(repository <- myUSer.getRepositories()) {
+        <tr>
+            <td>@repository.getName()</td>
+
+            @if(repository.getDescription() == "null") {
+            <td>Not Available</td>
+            } else {
+            <td>@repository.getDescription()</td>
+            }
+            <td><a href="@repository.getHtml_url()" class="btn btn-primary">View</a></td>
+
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
